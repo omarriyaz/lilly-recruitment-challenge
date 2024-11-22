@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const medicine_list = document.getElementById('list');
     const medicine_form = document.getElementById('medicine-form');
+    const update_form = document.getElementById('update-form');
 
 
     // function to display the list of me
@@ -75,9 +76,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // add event listener to the form
-    medicine_form.addEventListener('submit', add_medicine);
+    // function to update an already existing medicine
+    async function update_medicine(event) {
 
-    // fetch medicines when the page loads
+        event.preventDefault();
+
+        const name = document.getElementById('update-name').value;
+        const price = parseFloat(document.getElementById('update-price').value);
+
+        try {
+            const form_data = new FormData();
+            form_data.append('name', name);
+            form_data.append('price', price);
+
+            const response = await fetch('http://localhost:8000/update', {
+                method: 'POST',
+                body: form_data
+            });
+
+            if (!response.ok) throw new Error('Failed to update medicine');
+
+            // clear form inputs
+            document.getElementById('update-name').value = '';
+            document.getElementById('update-price').value = '';
+
+            // refresh the medicine list
+            await display_medicines();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to update medicine. Please try again.');
+        }
+    }
+
+    // add event listeners
+    medicine_form.addEventListener('submit', add_medicine);
+    update_form.addEventListener('submit', update_medicine);
+
     display_medicines();
 });

@@ -13,28 +13,51 @@
     <header>
         <h1>Medicine Tracker</h1>
     </header>
-    <main>
-        
+
+    <main class="container">
+
+
+
         <section id="list-of-medicines">
+            <h2>Medicines List</h2>
             <ul id="list"></ul>
         </section>
 
-        <section id="add-medicine-form">
-            <h3>Add New Medicine</h3>
-            <form id="medicine-form">
-                <div class="form-group">
-                    <label for="medicine-name">Name:</label>
-                    <input type="text" id="medicine-name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="medicine-price">Price:</label>
-                    <input type="number" id="medicine-price" name="price">
-                </div>
-                <button type="submit">Add Medicine</button>
-            </form>
+
+
+        <section class="forms-container">
+            <div id="add-medicine-form">
+                <h3>Add New Medicine</h3>
+                <form id="medicine-form">
+                    <div class="form-group">
+                        <label for="medicine-name">Name:</label>
+                        <input type="text" id="medicine-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medicine-price">Price:</label>
+                        <input type="number" id="medicine-price" name="price" step="0.01" required>
+                    </div>
+                    <button type="submit">Add Medicine</button>
+                </form>
+            </div>
+            
+            <div id="update-medicine-form">
+                <h3>Update Medicine</h3>
+                <form id="update-form">
+                    <div class="form-group">
+                        <label for="update-name">Name:</label>
+                        <input type="text" id="update-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="update-price">New Price:</label>
+                        <input type="number" id="update-price" name="price" step="0.01" required>
+                    </div>
+                    <button type="submit">Update Medicine</button>
+                </form>
+            </div>
         </section>
 
-
+        
     </main>
     <script src="script.js"></script>
 </body>

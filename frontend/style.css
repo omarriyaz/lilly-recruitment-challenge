@@ -31,9 +31,23 @@ body {
 
 /* ---- Your custom styles below ---- */
 
+.container {
+    display: flex;
+    max-width: 1000px;
+    margin: 10px auto;
+    padding: 0 10px;
+    gap: 20px;
+}
+
 #list-of-medicines {
-    max-width: 500px;
-    margin: 20px auto;
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+#list {
+    list-style: none;
     padding: 0;
 }
 
@@ -41,11 +55,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: #f8f9fa;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 5px;
 }
 
 .medicine-name {
@@ -56,47 +69,80 @@ body {
 
 .medicine-price {
     font-size: 14px;
-    color: #333;
+    color: #349538;
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 4px;
 }
 
+.forms-container {
+    width: 300px;
+}
 
-
-
-#add-medicine-form {
-    max-width: 250px;
-    margin: 0 auto;
+#add-medicine-form,
+#update-medicine-form {
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-#medicine-form .form-group {
+.form-group {
     margin-bottom: 15px;
 }
 
-#medicine-form label {
+.form-group label {
     display: block;
     margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
 }
 
-#medicine-form input {
+.form-group input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 14px;
 }
 
-#medicine-form button {
-    background-color: #4CAF50;
+.form-group input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+button {
+    width: 100%;
+    background-color: #349538;
     color: white;
-    padding: 10px 15px;
+    padding: 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-#medicine-form button:hover {
+button:hover {
     background-color: #45a049;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h1 {
+    margin: 0;
+    color: #333;
+}
+
+h2, h3 {
+    margin-top: 0;
+    color: #444;
 }
