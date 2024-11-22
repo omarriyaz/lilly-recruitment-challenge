@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const medicine_list = document.getElementById('list');
+    const medicine_form = document.getElementById('medicine-form');
+
 
     // function to display the list of me
     async function display_medicines() {
@@ -34,6 +36,47 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error);
         }
     }
+
+
+    // function to add a new medicine
+    async function add_medicine(event) {
+
+        // prevent the default form submission
+        event.preventDefault();
+
+        // get form values
+        const name = document.getElementById('medicine-name').value;
+        const price = parseFloat(document.getElementById('medicine-price').value);
+
+        try {
+            // create FormData to send form data
+            const form_data = new FormData();
+            form_data.append('name', name);
+            form_data.append('price', price);
+
+            // send POST request to create medicine
+            const response = await fetch('http://localhost:8000/create', {
+                method: 'POST',
+                body: form_data
+            });
+
+            if (!response.ok) throw new Error('Failed to add medicine');
+
+            // clear form inputs
+            document.getElementById('medicine-name').value = '';
+            document.getElementById('medicine-price').value = '';
+
+            // refresh the medicine list
+            await display_medicines();
+        }
+        catch (error) {
+            console.error('Error:', error);
+            alert('Failed to add medicine. Please try again.');
+        }
+    }
+
+    // add event listener to the form
+    medicine_form.addEventListener('submit', add_medicine);
 
     // fetch medicines when the page loads
     display_medicines();

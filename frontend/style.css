@@ -32,8 +32,8 @@ body {
 /* ---- Your custom styles below ---- */
 
 #list-of-medicines {
-    margin: 20px auto;
     max-width: 500px;
+    margin: 20px auto;
     padding: 0;
 }
 
@@ -45,6 +45,7 @@ body {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .medicine-name {
@@ -56,4 +57,46 @@ body {
 .medicine-price {
     font-size: 14px;
     color: #333;
+}
+
+
+
+
+#add-medicine-form {
+    max-width: 250px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#medicine-form .form-group {
+    margin-bottom: 15px;
+}
+
+#medicine-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#medicine-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#medicine-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#medicine-form button:hover {
+    background-color: #45a049;
 }
