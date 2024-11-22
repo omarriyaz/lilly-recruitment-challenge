@@ -1,49 +1,40 @@
-// function to fetch all medicines from the backend
-async function fetch_medicines() {
-    try {
-        // fetch the medicines from the backend and store them in the data variable
-        const response = await fetch("http://127.0.0.1:8000/medicines");
-        const data = await response.json();
+document.addEventListener('DOMContentLoaded', () => {
+    const medicine_list = document.getElementById('list');
 
-        // select the main element and clear its content if there is any already existing
-        const main = document.querySelector("main");
-        main.innerHTML = "";
+    // function to display the list of me
+    async function display_medicines() {
+        try {
+            const response = await fetch('http://localhost:8000/medicines');
 
-        // check if the data variable is not empty
-        if (data.medicines && data.medicines.length > 0) {
+            // check if the response is ok
+            if (!response.ok) throw new Error('Failed to fetch medicines');
 
-            // create a list to display medicines
-            const list = document.createElement("ul");
+            // parse the response into JSON
+            const data = await response.json();
 
-            // loop through each item and handle invalid data
-            data.medicines.forEach((medicine) => {
-                const item = document.createElement("li");
-                const name = medicine.name ? medicine.name : "Name unavailable";
-                const price = medicine.price ? medicine.price : "Price unavailable";
+            // clear the current list of medicines
+            medicine_list.innerHTML = '';
 
-                item.textContent = `${name} : ${price}`;
-                list.appendChild(item);
+            // loop through medicines and display each one
+            data.medicines.forEach(({ name = "", price = null }) => {
+                const item = document.createElement('li');
+                const name_span = document.createElement('span');
+                const price_span = document.createElement('span');
+
+                name_span.className = 'medicine-name';
+                name_span.textContent = name || "Name Unavailable";
+                price_span.className = 'medicine-price';
+                price_span.textContent = price || "Price Unavailable";
+
+                item.append(name_span, price_span);
+                medicine_list.appendChild(item);
             });
-            main.appendChild(list);
         }
-
-        else {
-            // if no medicines are found
-            main.textContent = "No medicines found";
+        catch (error) {
+            console.error('Error:', error);
         }
     }
-    catch (error) {
-        // handle errors eg. the server being down
-        console.error("Error fetching medicines:", error);
-        const main = document.querySelector("main");
-        main.textContent = "Failed to fetch medicines. Please try again later.";
-    }
-}
 
-// initialize the app
-function init() {
-    fetch_medicines();
-}
-
-// wait until the page content is fully loaded
-document.addEventListener("DOMContentLoaded", init);
+    // fetch medicines when the page loads
+    display_medicines();
+});

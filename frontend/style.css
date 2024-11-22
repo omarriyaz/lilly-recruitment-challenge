@@ -30,3 +30,30 @@ body {
 }
 
 /* ---- Your custom styles below ---- */
+
+#list-of-medicines {
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 0;
+}
+
+#list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.medicine-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.medicine-price {
+    font-size: 14px;
+    color: #333;
+}
