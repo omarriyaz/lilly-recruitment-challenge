@@ -108,9 +108,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // function to delete a medicine
+    async function delete_medicine(event) {
+
+        event.preventDefault();
+
+        // get the name of the medicine to delete
+        const name = document.getElementById('delete-name').value;
+
+        try {
+            // create FormData to send form data
+            const form_data = new FormData();
+            form_data.append('name', name);
+
+            // send DELETE request to delete medicine
+            const response = await fetch('http://localhost:8000/delete', {
+                method: 'DELETE',
+                body: form_data
+            });
+
+            // check if the response is ok
+            if (!response.ok) throw new Error('Failed to delete medicine');
+
+            // clear form inputs
+            document.getElementById('delete-name').value = '';
+
+            // refresh the medicine list
+            await display_medicines();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to delete medicine. Please try again.');
+        }
+    }
+
     // add event listeners
     medicine_form.addEventListener('submit', add_medicine);
     update_form.addEventListener('submit', update_medicine);
+    const delete_form = document.getElementById('delete-form');
+    delete_form.addEventListener('submit', delete_medicine);
 
     display_medicines();
 });

@@ -69,7 +69,7 @@ body {
 
 .medicine-price {
     font-size: 14px;
-    color: #349538;
+    color: #0cb272;
     background-color: #e9ecef;
     padding: 5px 10px;
     border-radius: 4px;
@@ -145,4 +145,25 @@ h1 {
 h2, h3 {
     margin-top: 0;
     color: #444;
+}
+
+#delete-medicine-form {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#delete-medicine-form button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#delete-medicine-form button:hover {
+    background-color: #ff3333;
 }
