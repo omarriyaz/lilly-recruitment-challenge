@@ -1,11 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
     const medicine_list = document.getElementById('list');
+    const search_bar = document.getElementById('search-bar');
     const medicine_form = document.getElementById('medicine-form');
     const update_form = document.getElementById('update-form');
 
+    // function to search for a medicine
+    async function search_medicine(event) {
+        const name = event.target.value.trim();
 
+        if (name === '') {
 
-    // function to display the list of me
+            // if the search bar is empty, show all medicines again
+            display_medicines();
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8000/medicines/${name}`);
+
+            if (!response.ok) throw new Error('Medicine not found');
+
+            const data = await response.json();
+
+            if (data.error) {
+                medicine_list.innerHTML = `<li class="error-message">${data.error}</li>`;
+            } else {
+
+                // clear the current list of medicines and display the found one
+                medicine_list.innerHTML = '';
+                const item = document.createElement('li');
+                const name_span = document.createElement('span');
+                const price_span = document.createElement('span');
+
+                name_span.className = 'medicine-name';
+                name_span.textContent = data.name || "Name Unavailable";
+                price_span.className = 'medicine-price';
+                price_span.textContent = data.price ? `${data.price}` : "Price Unavailable";
+
+                item.append(name_span, price_span);
+                medicine_list.appendChild(item);
+            }
+        }
+        catch (error) {
+            console.error('Error:', error);
+            medicine_list.innerHTML = `<li class="error-message">Error: Medicine not found.</li>`;
+        }
+    }
+
+    // function to display the list of medicines
     async function display_medicines() {
         try {
             const response = await fetch('http://localhost:8000/medicines');
@@ -166,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // add event listeners
+    search_bar.addEventListener('input', search_medicine);
     medicine_form.addEventListener('submit', add_medicine);
     update_form.addEventListener('submit', update_medicine);
     const delete_form = document.getElementById('delete-form');
