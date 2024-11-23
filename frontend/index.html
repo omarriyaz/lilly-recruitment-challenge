@@ -16,8 +16,6 @@
 
     <main class="container">
 
-        
-
         <section id="list-of-medicines">
             <h2>Medicines List</h2>
 
@@ -29,46 +27,57 @@
         </section>
 
 
-
         <section class="forms-container">
+
             <div id="add-medicine-form">
                 <h3>Add New Medicine</h3>
                 <form id="medicine-form">
+
                     <div class="form-group">
                         <label for="medicine-name">Name:</label>
                         <input type="text" id="medicine-name" name="name" required>
                     </div>
+
                     <div class="form-group">
                         <label for="medicine-price">Price:</label>
                         <input type="number" id="medicine-price" name="price" step="0.01" required>
                     </div>
+
                     <button type="submit">Add Medicine</button>
+
                 </form>
             </div>
             
             <div id="update-medicine-form">
                 <h3>Update Medicine Price</h3>
                 <form id="update-form">
+
                     <div class="form-group">
                         <label for="update-name">Name:</label>
                         <input type="text" id="update-name" name="name" required>
                     </div>
+
                     <div class="form-group">
                         <label for="update-price">New Price:</label>
                         <input type="number" id="update-price" name="price" step="0.01" required>
                     </div>
+
                     <button type="submit">Update Medicine</button>
+
                 </form>
             </div>
 
             <div id="delete-medicine-form">
                 <h3>Delete Medicine</h3>
                 <form id="delete-form">
+
                     <div class="form-group">
                         <label for="delete-name">Name:</label>
                         <input type="text" id="delete-name" name="name" required>
                     </div>
+
                     <button type="submit">Delete Medicine</button>
+
                 </form>
             </div>
 
@@ -77,10 +86,8 @@
                 <button id="calculate-average">Calculate</button>
             </div>
 
-            
         </section>
 
-        
     </main>
     <script src="script.js"></script>
 </body>

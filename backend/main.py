@@ -136,6 +136,8 @@ def delete_med(name: str = Form(...)):
     return {"error": "Medicine not found"}
 
 
+# Add your average function here
+
 @app.get("/average")
 def average_price():
 

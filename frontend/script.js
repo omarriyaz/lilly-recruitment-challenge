@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
 
-            alert(`Average Price: ${data.average_price}`);
+            alert(`Average Price: £ ${data.average_price}`);
         }
         catch (error) {
             console.error('Error:', error);
@@ -218,5 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculate_button = document.getElementById('calculate-average');
     calculate_button.addEventListener('click', average_price);
 
+    // display the list of medicines
     display_medicines();
 });

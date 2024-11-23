@@ -40,26 +40,23 @@ body {
 }
 
 #search-section {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
 }
 
 #search-bar {
     width: 100%;
-    max-width: 400px;
+    max-width: 1000px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #search-bar:focus {
     outline: none;
     border-color: #4CAF50;
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
 #list-of-medicines {
