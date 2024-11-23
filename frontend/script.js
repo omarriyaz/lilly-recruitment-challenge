@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data.error) {
                 medicine_list.innerHTML = `<li class="error-message">${data.error}</li>`;
-            } else {
+            }
+
+            else {
 
                 // clear the current list of medicines and display the found one
                 medicine_list.innerHTML = '';
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name_span.className = 'medicine-name';
                 name_span.textContent = data.name || "Name Unavailable";
                 price_span.className = 'medicine-price';
-                price_span.textContent = data.price ? `${data.price}` : "Price Unavailable";
+                price_span.textContent = data.price ? `£ ${data.price.toFixed(2)}` : "Price Unavailable";
 
                 item.append(name_span, price_span);
                 medicine_list.appendChild(item);
@@ -70,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name_span.className = 'medicine-name';
                 name_span.textContent = name || "Name Unavailable";
                 price_span.className = 'medicine-price';
-                price_span.textContent = price || "Price Unavailable";
+                price_span.textContent = price ? `£ ${price.toFixed(2)}` : "Price Unavailable";
 
                 item.append(name_span, price_span);
                 medicine_list.appendChild(item);
