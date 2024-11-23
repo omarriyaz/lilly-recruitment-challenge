@@ -32,6 +32,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/medicines")
 def get_all_meds():
     """
@@ -42,6 +43,7 @@ def get_all_meds():
     with open('data.json') as meds:
         data = json.load(meds)
     return data
+
 
 @app.get("/medicines/{name}")
 def get_single_med(name: str):
@@ -60,6 +62,7 @@ def get_single_med(name: str):
                 return med
     return {"error": "Medicine not found"}
 
+
 @app.post("/create")
 def create_med(name: str = Form(...), price: float = Form(...)):
     """
@@ -74,12 +77,19 @@ def create_med(name: str = Form(...), price: float = Form(...)):
     with open('data.json', 'r+') as meds:
         current_db = json.load(meds)
         new_med = {"name": name, "price": price}
+
+        # check if medicine already exists in the database
+        for med in current_db["medicines"]:
+            if med['name'] == name:
+                return {"error": "Medicine already exists"}
+
         current_db["medicines"].append(new_med)
         meds.seek(0)
         json.dump(current_db, meds)
         meds.truncate()
-        
+
     return {"message": f"Medicine created successfully with name: {name}"}
+
 
 @app.post("/update")
 def update_med(name: str = Form(...), price: float = Form(...)):
@@ -103,6 +113,7 @@ def update_med(name: str = Form(...), price: float = Form(...)):
                 return {"message": f"Medicine updated successfully with name: {name}"}
     return {"error": "Medicine not found"}
 
+
 @app.delete("/delete")
 def delete_med(name: str = Form(...)):
     """
@@ -124,7 +135,31 @@ def delete_med(name: str = Form(...)):
                 return {"message": f"Medicine deleted successfully with name: {name}"}
     return {"error": "Medicine not found"}
 
-# Add your average function here
+
+@app.get("/average")
+def average_price():
+
+    with open('data.json') as meds:
+        current_db = json.load(meds)
+        tot = 0
+        cnt = 0
+
+        for med in current_db["medicines"]:
+
+            # get the price and ensure it is a valid number
+            price = med.get('price', 0)
+
+            # check if price is a valid number
+            if isinstance(price, (int, float)) and price is not None:
+                tot += price
+                cnt += 1
+
+        # there are medicines with valid prices in the database
+        if cnt > 0:
+            return {"average_price": tot / cnt}
+        else:
+            return {"error": "No valid prices found"}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

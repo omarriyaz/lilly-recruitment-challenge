@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const update_form = document.getElementById('update-form');
 
 
+
     // function to display the list of me
     async function display_medicines() {
         try {
@@ -135,9 +136,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // refresh the medicine list
             await display_medicines();
-        } catch (error) {
+        }
+
+        catch (error) {
             console.error('Error:', error);
             alert('Failed to delete medicine. Please try again.');
+        }
+    }
+
+
+    // function to display the average price of all medicines
+    async function average_price(event) {
+
+        event.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:8000/average');
+
+            if (!response.ok) throw new Error('Failed to fetch average price');
+
+            const data = await response.json();
+
+            alert(`Average Price: ${data.average_price}`);
+        }
+        catch (error) {
+            console.error('Error:', error);
+            alert('Failed to fetch average price. Please try again.');
         }
     }
 
@@ -146,6 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
     update_form.addEventListener('submit', update_medicine);
     const delete_form = document.getElementById('delete-form');
     delete_form.addEventListener('submit', delete_medicine);
+    const calculate_button = document.getElementById('calculate-average');
+    calculate_button.addEventListener('click', average_price);
 
     display_medicines();
 });
